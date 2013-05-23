@@ -55,6 +55,14 @@ def dumping_dicts_separates_key_and_value_with_colon_and_items_with_newlines():
 
 
 @istest
+def keys_in_dicts_are_right_aligned():
+    assert_equal(
+        "a-long-key: 1\n     short: 2",
+        dumps(collections.OrderedDict([("a-long-key", 1), ("short", 2)]))
+    )
+
+
+@istest
 def lists_within_dicts_are_on_newlines():
     assert_equal(
         "one:\n  - 3",

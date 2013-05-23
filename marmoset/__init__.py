@@ -11,9 +11,16 @@ def dumps(value):
             for element in value
         )
     elif isinstance(value, dict):
-        return "\n".join(
-            "{0}:{1}".format(dumps(item_key), _dumps_item_value(item_value))
+        key_value_strs = [
+            (dumps(item_key), _dumps_item_value(item_value))
             for item_key, item_value in value.iteritems()
+        ]
+        
+        max_key_length = max(len(key) for key, value in key_value_strs)
+        
+        return "\n".join(
+            "{0:>{width}}:{1}".format(key, value, width=max_key_length)
+            for key, value in key_value_strs
         )
 
 
