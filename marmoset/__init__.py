@@ -26,19 +26,7 @@ def dumps(value):
             for key, value in key_value_strs
         ]
         
-        output = []
-        
-        previous = None
-        for item_str in item_strs:
-            if previous is not None:
-                output.append("\n")
-                if "\n" in previous or "\n" in item_str:
-                    output.append("\n")
-            output.append(item_str)
-            
-            previous = item_str
-            
-        return "".join(output)
+        return _join_with_newline_spacing(item_strs)
 
 
 def _dumps_element(element):
@@ -56,3 +44,19 @@ def _is_scalar(value):
 def _indent(value, indentation=2):
     return value.replace("\n", "\n" + " " * indentation)
 
+
+def _join_with_newline_spacing(values):
+    output = []
+    
+    previous = None
+    for value in values:
+        if previous is not None:
+            output.append("\n")
+            if "\n" in previous or "\n" in value:
+                output.append("\n")
+                
+        output.append(value)
+        
+        previous = value
+        
+    return "".join(output)
