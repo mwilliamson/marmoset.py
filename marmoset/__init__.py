@@ -10,10 +10,8 @@ def dumps(value):
     elif isinstance(value, (int, long, float, basestring)):
         return str(value)
     elif isinstance(value, list):
-        return "\n".join(
-            _dumps_element(element)
-            for element in value
-        )
+        element_strs = map(_dumps_element, value)
+        return _join_with_newline_spacing(element_strs)
     elif isinstance(value, dict):
         key_value_strs = [
             (dumps(item_key), dumps(item_value))
@@ -30,18 +28,15 @@ def dumps(value):
 
 
 def _dumps_element(element):
-    output = _indent(dumps(element))
-    if _is_scalar(element):
-        return "- {0}".format(output)
-    else:
-        return "- {0}\n".format(output)
+    output = _indent(dumps(element), 2)
+    return "- {0}".format(output)
 
 
 def _is_scalar(value):
     return not isinstance(value, (list, dict))
 
 
-def _indent(value, indentation=2):
+def _indent(value, indentation):
     return value.replace("\n", "\n" + " " * indentation)
 
 
