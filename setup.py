@@ -8,7 +8,7 @@ def read(fname):
 
 setup(
     name='marmoset',
-    version='0.1.0',
+    version='0.1.1',
     description='Convert Python values, such as lists and dicts, into human-friendly strings',
     long_description=read("README"),
     author='Michael Williamson',
