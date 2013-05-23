@@ -1,8 +1,9 @@
 import collections
+from StringIO import StringIO
 
 from nose.tools import istest, assert_equal
 
-from marmoset import dumps
+from marmoset import dumps, dump
 
 
 @istest
@@ -68,3 +69,12 @@ def values_within_dicts_are_indented_if_they_are_on_multiple_lines():
         "one: - 3\n     - 2\n     - 1",
         dumps({"one": [3, 2, 1]})
     )
+
+
+@istest
+def dump_writes_to_file_like_object():
+    buf = StringIO()
+    dump(True, buf)
+    assert_equal("true", buf.getvalue())
+    
+    

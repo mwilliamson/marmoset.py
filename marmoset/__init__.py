@@ -1,3 +1,7 @@
+def dump(value, output):
+    output.write(dumps(value))
+
+
 def dumps(value):
     if value is True:
         return "true"
