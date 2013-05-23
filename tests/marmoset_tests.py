@@ -72,6 +72,22 @@ def values_within_dicts_are_indented_if_they_are_on_multiple_lines():
 
 
 @istest
+def multiline_dict_value_is_separated_by_newline_from_next_value():
+    assert_equal(
+        "one: - 3\n     - 2\n\ntwo: false",
+        dumps(collections.OrderedDict([("one", [3, 2]), ("two", False)]))
+    )
+
+
+@istest
+def multiline_dict_value_is_separated_by_newline_from_previous_value():
+    assert_equal(
+        "two: false\n\none: - 3\n     - 2",
+        dumps(collections.OrderedDict([("two", False), ("one", [3, 2])]))
+    )
+
+
+@istest
 def dump_writes_to_file_like_object():
     buf = StringIO()
     dump(True, buf)

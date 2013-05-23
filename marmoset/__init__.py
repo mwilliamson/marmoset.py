@@ -21,11 +21,24 @@ def dumps(value):
         ]
         
         max_key_length = max(len(key) for key, value in key_value_strs)
-        
-        return "\n".join(
+        item_strs = [
             "{0:>{width}}: {1}".format(key, _indent(value, max_key_length + 2), width=max_key_length)
             for key, value in key_value_strs
-        )
+        ]
+        
+        output = []
+        
+        previous = None
+        for item_str in item_strs:
+            if previous is not None:
+                output.append("\n")
+                if "\n" in previous or "\n" in item_str:
+                    output.append("\n")
+            output.append(item_str)
+            
+            previous = item_str
+            
+        return "".join(output)
 
 
 def _dumps_element(element):
