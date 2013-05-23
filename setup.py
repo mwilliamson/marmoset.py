@@ -12,6 +12,7 @@ setup(
     description='Convert Python values, such as lists and dicts, into human-friendly strings',
     long_description=read("README"),
     author='Michael Williamson',
+    author_email='mike@zwobble.org',
     url='http://github.com/mwilliamson/marmoset.py',
     packages=['marmoset'],
 )
