@@ -63,16 +63,8 @@ def keys_in_dicts_are_right_aligned():
 
 
 @istest
-def lists_within_dicts_are_on_newlines():
-    assert_equal(
-        "one:\n  - 3",
-        dumps({"one": [3]})
-    )
-
-
-@istest
 def values_within_dicts_are_indented_if_they_are_on_multiple_lines():
     assert_equal(
-        "one:\n  - 3\n  - 2\n  - 1",
+        "one: - 3\n     - 2\n     - 1",
         dumps({"one": [3, 2, 1]})
     )
