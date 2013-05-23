@@ -32,10 +32,6 @@ def _dumps_element(element):
     return "- {0}".format(output)
 
 
-def _is_scalar(value):
-    return not isinstance(value, (list, dict))
-
-
 def _indent(value, indentation):
     return value.replace("\n", "\n" + " " * indentation)
 
