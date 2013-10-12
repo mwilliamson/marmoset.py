@@ -1,4 +1,7 @@
-import collections
+try:
+    from collections import OrderedDict
+except ImportError:
+    from ordereddict import OrderedDict
 import io
 
 from nose.tools import istest, assert_equal
@@ -51,7 +54,7 @@ def items_in_lists_are_separated_by_blank_line_if_they_are_multiline():
 def dumping_dicts_separates_key_and_value_with_colon_and_items_with_newlines():
     assert_equal(
         "one: 1\ntwo: 2",
-        dumps(collections.OrderedDict([("one", 1), ("two", 2)]))
+        dumps(OrderedDict([("one", 1), ("two", 2)]))
     )
 
 
@@ -59,7 +62,7 @@ def dumping_dicts_separates_key_and_value_with_colon_and_items_with_newlines():
 def keys_in_dicts_are_right_aligned():
     assert_equal(
         "a-long-key: 1\n     short: 2",
-        dumps(collections.OrderedDict([("a-long-key", 1), ("short", 2)]))
+        dumps(OrderedDict([("a-long-key", 1), ("short", 2)]))
     )
 
 
@@ -75,7 +78,7 @@ def values_within_dicts_are_indented_if_they_are_on_multiple_lines():
 def multiline_dict_value_is_separated_by_newline_from_next_value():
     assert_equal(
         "one: - 3\n     - 2\n\ntwo: false",
-        dumps(collections.OrderedDict([("one", [3, 2]), ("two", False)]))
+        dumps(OrderedDict([("one", [3, 2]), ("two", False)]))
     )
 
 
@@ -83,7 +86,7 @@ def multiline_dict_value_is_separated_by_newline_from_next_value():
 def multiline_dict_value_is_separated_by_newline_from_previous_value():
     assert_equal(
         "two: false\n\none: - 3\n     - 2",
-        dumps(collections.OrderedDict([("two", False), ("one", [3, 2])]))
+        dumps(OrderedDict([("two", False), ("one", [3, 2])]))
     )
 
 
