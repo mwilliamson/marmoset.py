@@ -2,3 +2,4 @@
 /_virtualenv
 *.egg-info
 /README
+/.tox
