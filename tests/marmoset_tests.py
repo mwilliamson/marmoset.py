@@ -1,5 +1,5 @@
 import collections
-from StringIO import StringIO
+import io
 
 from nose.tools import istest, assert_equal
 
@@ -89,8 +89,8 @@ def multiline_dict_value_is_separated_by_newline_from_previous_value():
 
 @istest
 def dump_writes_to_file_like_object():
-    buf = StringIO()
+    buf = io.BytesIO()
     dump(True, buf)
-    assert_equal("true", buf.getvalue())
+    assert_equal(b"true", buf.getvalue())
     
     

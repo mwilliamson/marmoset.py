@@ -1,5 +1,16 @@
+import sys
+
+
+if sys.version_info[0] == 2:
+    _literal_types = (int, long, float, basestring)
+    _iteritems = lambda x: x.iteritems()
+else:
+    _literal_types = (int, float, str)
+    _iteritems = lambda x: x.items()
+
+
 def dump(value, output):
-    output.write(dumps(value))
+    output.write(dumps(value).encode("utf8"))
 
 
 def dumps(value):
@@ -7,7 +18,7 @@ def dumps(value):
         return "true"
     elif value is False:
         return "false"
-    elif isinstance(value, (int, long, float, basestring)):
+    elif isinstance(value, _literal_types):
         return str(value)
     elif isinstance(value, list):
         element_strs = map(_dumps_element, value)
@@ -15,7 +26,7 @@ def dumps(value):
     elif isinstance(value, dict):
         key_value_strs = [
             (dumps(item_key), dumps(item_value))
-            for item_key, item_value in value.iteritems()
+            for item_key, item_value in _iteritems(value)
         ]
         
         max_key_length = max(len(key) for key, value in key_value_strs)
